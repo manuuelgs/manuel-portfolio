@@ -55,9 +55,11 @@ export default function Contact() {
   const currentRole = roles[loopNum % roles.length];
 
   return (
-    <section className="px-6 md:px-12 py-24 md:py-32 flex flex-col justify-between min-h-[80vh] bg-neutral-100" id="contact">
+    // Ajustado py-16 y min-h-[60vh] para mobile
+    <section className="px-6 md:px-12 py-16 md:py-32 flex flex-col justify-between min-h-[60vh] md:min-h-[80vh] bg-neutral-100" id="contact">
       
-      <div className="border-b border-black pb-4 mb-16">
+      {/* Ajustado mb-10 para mobile */}
+      <div className="border-b border-black pb-4 mb-10 md:mb-16">
         <span className="font-mono text-xs uppercase tracking-widest text-neutral-500">
           07 — CONTACT
         </span>
@@ -82,7 +84,8 @@ export default function Contact() {
         </h2>
       </div>
 
-      <div className="mt-24 md:mt-0 pt-8 border-t border-black">
+      {/* Reducido el mt-24 a mt-12 en mobile para juntar la animación con los links */}
+      <div className="mt-12 md:mt-0 pt-8 border-t border-black">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 font-mono text-xs uppercase tracking-widest">
           
           <div className="flex flex-col gap-2">

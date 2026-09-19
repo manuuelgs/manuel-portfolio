@@ -58,7 +58,6 @@ export default function Services() {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
-    // Configura el observador para que se active cuando el elemento pase por el centro de la pantalla
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -73,17 +72,16 @@ export default function Services() {
       },
       {
         root: null,
-        rootMargin: "-40% 0px -40% 0px", // Margen que crea una "línea imaginaria" en el centro del viewport
-        threshold: 0,
+        // Usamos threshold 0.5 en lugar de rootMargin para que detecte perfecto el scroll horizontal en mobile
+        rootMargin: "0px", 
+        threshold: 0.5,
       }
     );
 
-    // Selecciona y observa todos los artículos de servicio
     const items = document.querySelectorAll(".service-item");
     items.forEach((item) => observerRef.current?.observe(item));
 
     return () => {
-      // Limpieza del observador al desmontar
       if (observerRef.current) {
         observerRef.current.disconnect();
       }
@@ -94,20 +92,15 @@ export default function Services() {
     <section className="services-section">
       <div className="services-content">
         
-        {/* COLUMNA IZQUIERDA (Textos en Desktop / Todo intercalado en Mobile) */}
+        {/* COLUMNA IZQUIERDA (Textos en Desktop / Carrusel en Mobile) */}
         <div className="services-left">
           {services.map((service) => (
             <article
               className="service-item"
               key={service.id}
-              data-service-id={service.id} // Identificador para el IntersectionObserver
+              data-service-id={service.id} 
             >
-              {/* Video intercalado exclusivo para mobile */}
-              <div className="service-mobile-visual">
-                <div className="placeholder services-video">
-                  <span className="mono">{service.media}</span>
-                </div>
-              </div>
+              {/* Eliminamos el div service-mobile-visual de aquí para usar la ventana global */}
 
               <span className="mono">
                 {service.number} — {service.title}
@@ -122,7 +115,7 @@ export default function Services() {
           ))}
         </div>
 
-        {/* COLUMNA DERECHA (Ventana sincronizada exclusiva para Desktop) */}
+        {/* COLUMNA DERECHA (Ventana sincronizada para Desktop Y Mobile) */}
         <div className="services-window">
           <div className="services-media-grid">
             {activeService.media.map((item) => (
@@ -133,6 +126,13 @@ export default function Services() {
           </div>
         </div>
 
+      </div>
+
+      {/* Indicador de Swipe para Mobile (Manejado con utility classes de Tailwind) */}
+      <div className="md:hidden flex justify-start mt-6 px-6 border-t border-black pt-4 font-mono text-[10px] uppercase tracking-widest text-neutral-400">
+        <span className="animate-pulse flex items-center gap-2">
+          Swipe <span className="text-base leading-none">→</span>
+        </span>
       </div>
     </section>
   );
