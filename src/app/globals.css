@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
 @import "tailwindcss";
 
 
@@ -570,118 +571,71 @@ a {
 
 
 .services-section {
-
-  margin-top:220px;
-
-  padding:0 24px;
-
+  margin-top: 100px; /* Reducido desde 220px */
+  padding: 0 24px;
+  position: relative;
+  overflow: clip; 
 }
-
-
 
 .services-content {
-
-  display:grid;
-
-  grid-template-columns:40% 60%;
-
-  gap:40px;
-
-  align-items:start;
-
+  display: grid;
+  grid-template-columns: 40% 60%;
+  gap: 40px;
+  align-items: start;
 }
-
-
 
 .services-left {
-
-  display:flex;
-
-  flex-direction:column;
-
+  display: flex;
+  flex-direction: column;
 }
 
-
-
 .service-item {
-
-  min-height:100vh;
-
-  padding-top:120px;
-
+  min-height: 100vh;
+  padding-top: 120px;
 }
 
 .service-item span {
-
-  display:block;
-
-  margin-bottom:50px;
-
+  display: block;
+  margin-bottom: 50px;
 }
-
-
 
 .service-item ul {
-
-  list-style:none;
-
-  padding:0;
-
-  margin:0;
-
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-
-
 
 .service-item li {
-
-  font-size:clamp(1.5rem,3vw,3rem);
-
-  letter-spacing:-.04em;
-
-  line-height:1.1;
-
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  letter-spacing: -.04em;
+  line-height: 1.1;
 }
-
-
 
 .services-window {
-
-  position:sticky;
-
-  top:80px;
-
-  height:80vh;
-
-  display:flex;
-
-  align-items:center;
-
+  position: sticky;
+  top: 80px;
+  height: 80vh;
+  display: flex;
+  align-items: center;
 }
 
-
-
 .services-media-grid {
-
-  width:100%;
-
+  width: 100%;
 }
 
 .services-video {
-
-  width:100%;
-
-  aspect-ratio:16/9;
-
-  border:1px solid var(--line);
-
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 1px solid var(--line); /* Asegura que la variable --line exista en tu root */
 }
 
-
 .services-media-grid .placeholder {
+  aspect-ratio: 0.78;
+}
 
-  aspect-ratio:0.78;
-
+/* Ocultamos los videos intercalados en desktop por defecto */
+.service-mobile-visual {
+  display: none;
 }
 
 
@@ -823,6 +777,42 @@ a {
     height:auto;
 
   }
+
+  @media (max-width: 768px) {
+  .services-section {
+    margin-top: 60px; /* Reducido desde 120px */
+  }
+  
+  /* Mantén el resto de tus reglas móviles aquí abajo... */
+
+  .services-content {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* Apagamos la ventana sticky general en teléfonos */
+  .services-window {
+    display: none; 
+  }
+
+  /* Encendemos los videos dentro de cada servicio */
+  .service-mobile-visual {
+    display: block;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .service-item {
+    min-height: auto; /* Quitamos el 100vh para que no haya espacios en blanco en mobile */
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+
+  /* Hacemos un poco más pequeños los textos en mobile para que respire */
+  .service-item li {
+    font-size: 2rem; 
+  }
+}
 
 
 }
