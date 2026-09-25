@@ -107,18 +107,57 @@ export default async function ProjectPage({ params }: PageProps) {
       </section>
 
       {/* 5. MEDIA DETAILS (2 IMÁGENES FULL WIDTH SIN GAP EN MOBILE) */}
-      <section className="w-full grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-8 mb-24 md:mb-36">
-        <div className="relative w-full aspect-[4/5] bg-neutral-200">
-          <div className="absolute inset-0 flex items-center justify-center font-mono text-xs uppercase tracking-widest text-neutral-400">
-            [ Detail 01 ]
-          </div>
-        </div>
-        <div className="relative w-full aspect-[4/5] bg-neutral-300">
-          <div className="absolute inset-0 flex items-center justify-center font-mono text-xs uppercase tracking-widest text-neutral-500">
-            [ Detail 02 ]
-          </div>
-        </div>
-      </section>
+<section className="w-full grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-8 mb-24 md:mb-36">
+  {/* Imagen 1 */}
+  {project.mediaDetail1 && (
+    <img 
+      src={project.mediaDetail1} 
+      alt={`${project.title} detail 1`} 
+      className="w-full h-full object-cover aspect-[4/5] bg-neutral-200" 
+    />
+  )}
+
+  {/* Imagen 2 */}
+  {project.mediaDetail2 && (
+    <img 
+      src={project.mediaDetail2} 
+      alt={`${project.title} detail 2`} 
+      className="w-full h-full object-cover aspect-[4/5] bg-neutral-200" 
+    />
+  )}
+</section>
+
+{/* 6. GALERÍA FULL WIDTH (Inteligente: Soporta JPG, PNG y MP4) */}
+{project.gallery && project.gallery.length > 0 && (
+  <section className="w-full flex flex-col gap-12 md:gap-24 mb-24 md:mb-36">
+    {project.gallery.map((mediaUrl, index) => {
+      // 1. Verificamos si la ruta termina en .mp4
+      const isVideo = mediaUrl.toLowerCase().endsWith('.mp4') || mediaUrl.toLowerCase().endsWith('.mov');
+
+      return isVideo ? (
+        // 2. Si es video, usamos la etiqueta <video> con los atributos para que se reproduzca solo
+        <video
+  key={index}
+  src={mediaUrl}
+  autoPlay
+  loop
+  muted
+  playsInline
+  suppressHydrationWarning
+  className="w-full h-auto object-cover bg-neutral-200"
+/>
+      ) : (
+        // 3. Si no es video, usamos la etiqueta <img> normal
+        <img 
+          key={index}
+          src={mediaUrl}
+          alt={`${project.title} hero detail ${index + 1}`}
+          className="w-full h-auto object-cover bg-neutral-200"
+        />
+      );
+    })}
+  </section>
+)}
 
       {/* 6. EXPERIENCE (Opcional si tiene link) */}
       {project.experienceUrl && (
