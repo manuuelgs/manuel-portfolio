@@ -84,7 +84,7 @@ export const projects: Project[] = [
     title: 'Bom Creative Studios',
     year: '2023',
     location: 'Caracas, VE',
-    heroImage: '/projects/bom/hero.png', // Placeholder temporal
+    heroImage: '/projects/bom/Hero.png', 
     client: 'Bom Creative Studios',
     services: ['Branding', 'Visual Identity',],
     overview:
