@@ -103,7 +103,7 @@ export const projects: Project[] = [
       year: '2023',
     },
   },
-  {
+  /* {
     slug: 'mvp-restaurants',
     index: '04 / 04',
     category: 'Dev',
@@ -125,5 +125,5 @@ export const projects: Project[] = [
       development: 'Manuel Garcia',
       year: '2026',
     },
-  },
+  },*/
 ];
