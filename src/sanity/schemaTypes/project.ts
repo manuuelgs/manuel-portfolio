@@ -15,7 +15,7 @@ export default defineType({
       title: 'URL Slug',
       type: 'slug',
       options: {
-        source: 'title', // Genera la URL automáticamente basado en el título
+        source: 'title',
         maxLength: 96,
       },
     }),
@@ -32,11 +32,36 @@ export default defineType({
       description: 'Ej: 2026',
     }),
     defineField({
+      name: 'role',
+      title: 'Your Role',
+      type: 'string',
+      description: 'Ej: Creative Developer, Web Development, Brand Designer...',
+    }),
+    defineField({
+      name: 'collaborators',
+      title: 'Design by / Collaborators',
+      type: 'string',
+      description: 'Créditos de diseño u otros participantes',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Project Description',
+      type: 'text', // Usa 'text' para áreas de texto grandes (párrafos)
+      description: 'Explica el desafío técnico, los plugins custom que usaste, etc.',
+    }),
+    defineField({
       name: 'heroImage',
       title: 'Hero Image',
       type: 'image',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'gallery',
+      title: 'Project Gallery',
+      type: 'array', // Esto te permite subir múltiples imágenes
+      of: [{ type: 'image', options: { hotspot: true } }],
       options: {
-        hotspot: true, // ¡Magia! Te permite encuadrar la imagen visualmente en el panel
+        layout: 'grid', // Para que en el panel se vean como una cuadrícula visual
       },
     }),
   ],
